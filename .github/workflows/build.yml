@@ -1,0 +1,77 @@
+name: CI
+
+on:
+  push: {}
+
+jobs:
+  linux-x86_64-rbe-1_5_0:
+    runs-on: ubuntu-24.04
+    permissions: read-all
+    steps:
+     
+    - uses: actions/checkout@v5
+
+    - name: Install bazelisk
+      run: |
+        curl -LO "https://github.com/bazelbuild/bazelisk/releases/download/v1.25.0/bazelisk-linux-amd64"
+        mkdir -p "${GITHUB_WORKSPACE}/bin/"
+        mv bazelisk-linux-amd64 "${GITHUB_WORKSPACE}/bin/bazel"
+        chmod +x "${GITHUB_WORKSPACE}/bin/bazel"
+
+    - name: Build
+      run: |
+        cd v1.5.0 && "${GITHUB_WORKSPACE}/bin/bazel" build --config=bb --config=rbe_linux_amd64 --remote_header=x-buildbuddy-api-key=${{ secrets.BUILDBUDDY_APIKEY }} //...
+  
+  linux-x86_64-1_5_0:
+    runs-on: ubuntu-24.04
+    permissions: read-all
+    steps:
+     
+    - uses: actions/checkout@v5
+
+    - name: Install bazelisk
+      run: |
+        curl -LO "https://github.com/bazelbuild/bazelisk/releases/download/v1.25.0/bazelisk-linux-amd64"
+        mkdir -p "${GITHUB_WORKSPACE}/bin/"
+        mv bazelisk-linux-amd64 "${GITHUB_WORKSPACE}/bin/bazel"
+        chmod +x "${GITHUB_WORKSPACE}/bin/bazel"
+
+    - name: Build
+      run: |
+        cd v1.5.0 && "${GITHUB_WORKSPACE}/bin/bazel" build --config=bb --config=rbe_linux_amd64 //...
+
+  linux-x86_64-rbe-1_4_0:
+    runs-on: ubuntu-24.04
+    permissions: read-all
+    steps:
+     
+    - uses: actions/checkout@v5
+
+    - name: Install bazelisk
+      run: |
+        curl -LO "https://github.com/bazelbuild/bazelisk/releases/download/v1.25.0/bazelisk-linux-amd64"
+        mkdir -p "${GITHUB_WORKSPACE}/bin/"
+        mv bazelisk-linux-amd64 "${GITHUB_WORKSPACE}/bin/bazel"
+        chmod +x "${GITHUB_WORKSPACE}/bin/bazel"
+
+    - name: Build
+      run: |
+        cd v1.4.0 && "${GITHUB_WORKSPACE}/bin/bazel" build --config=bb --config=rbe_linux_amd64 --remote_header=x-buildbuddy-api-key=${{ secrets.BUILDBUDDY_APIKEY }} //...
+  
+  linux-x86_64-1_4_0:
+    runs-on: ubuntu-24.04
+    permissions: read-all
+    steps:
+     
+    - uses: actions/checkout@v5
+
+    - name: Install bazelisk
+      run: |
+        curl -LO "https://github.com/bazelbuild/bazelisk/releases/download/v1.25.0/bazelisk-linux-amd64"
+        mkdir -p "${GITHUB_WORKSPACE}/bin/"
+        mv bazelisk-linux-amd64 "${GITHUB_WORKSPACE}/bin/bazel"
+        chmod +x "${GITHUB_WORKSPACE}/bin/bazel"
+
+    - name: Build
+      run: |
+        cd v1.4.0 && "${GITHUB_WORKSPACE}/bin/bazel" build --config=bb --config=rbe_linux_amd64 //...
