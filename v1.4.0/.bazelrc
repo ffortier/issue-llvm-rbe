@@ -1,0 +1,14 @@
+build:bb --bes_results_url=https://app.buildbuddy.io/invocation/
+build:bb --bes_backend=grpcs://remote.buildbuddy.io
+build:bb --remote_cache=grpcs://remote.buildbuddy.io
+build:bb --remote_timeout=3600
+build:bb --remote_cache_compression
+build:bb --nolegacy_important_outputs
+build:bb --experimental_remote_cache_compression_threshold=100
+
+build:rbe_linux_amd64 --remote_executor=grpcs://remote.buildbuddy.io
+build:rbe_linux_amd64 --host_platform=//platforms:buildbuddy
+build:rbe_linux_amd64 --platforms=//platforms:buildbuddy
+build:rbe_linux_amd64 --extra_execution_platforms=//platforms:buildbuddy
+build:rbe_linux_amd64 --jobs=50
+
